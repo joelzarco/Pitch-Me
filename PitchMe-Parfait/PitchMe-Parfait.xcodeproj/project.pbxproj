@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		96D1462B27F50B7300CC88F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D1462A27F50B7300CC88F9 /* AppDelegate.swift */; };
-		96D1462F27F50B7300CC88F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D1462E27F50B7300CC88F9 /* ViewController.swift */; };
+		96D1462F27F50B7300CC88F9 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D1462E27F50B7300CC88F9 /* RecordViewController.swift */; };
 		96D1463427F50B7700CC88F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96D1463327F50B7700CC88F9 /* Assets.xcassets */; };
 		96D1463727F50B7700CC88F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D1463527F50B7700CC88F9 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		96D1462727F50B7300CC88F9 /* PitchMe-Parfait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PitchMe-Parfait.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96D1462A27F50B7300CC88F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		96D1462E27F50B7300CC88F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		96D1462E27F50B7300CC88F9 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		96D1463327F50B7700CC88F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96D1463627F50B7700CC88F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96D1463827F50B7700CC88F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				96D1462A27F50B7300CC88F9 /* AppDelegate.swift */,
-				96D1462E27F50B7300CC88F9 /* ViewController.swift */,
+				96D1462E27F50B7300CC88F9 /* RecordViewController.swift */,
 				96D1463327F50B7700CC88F9 /* Assets.xcassets */,
 				96D1463527F50B7700CC88F9 /* LaunchScreen.storyboard */,
 				96D1463827F50B7700CC88F9 /* Info.plist */,
@@ -131,7 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96D1462F27F50B7300CC88F9 /* ViewController.swift in Sources */,
+				96D1462F27F50B7300CC88F9 /* RecordViewController.swift in Sources */,
 				96D1462B27F50B7300CC88F9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
