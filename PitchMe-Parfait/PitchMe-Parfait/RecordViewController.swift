@@ -16,7 +16,6 @@ class RecordViewController: UIViewController {
     let stopButton = UIButton()
     let recordLabel = UILabel()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
