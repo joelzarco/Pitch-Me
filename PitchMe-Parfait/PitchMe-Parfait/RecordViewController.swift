@@ -11,9 +11,11 @@ class RecordViewController: UIViewController {
     
     let spacing : CGFloat = 20
     
+    let titleLabel = UILabel()
     let recordButton = UIButton()
     let stopButton = UIButton()
     let recordLabel = UILabel()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,13 @@ class RecordViewController: UIViewController {
     }
     
     func style(){
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.text = "PitchMe Parfait!"
+        
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         let recordImage = UIImage(named: "Record") as UIImage?
         recordButton.setImage(recordImage, for: .normal)
@@ -36,15 +45,17 @@ class RecordViewController: UIViewController {
         stopButton.translatesAutoresizingMaskIntoConstraints = false
         stopButton.setImage(stopImage, for: .normal)
         
-        
-        
     }
     
     func layout(){
         
+        view.addSubview(titleLabel)
         view.addSubview(recordButton)
         view.addSubview(recordLabel)
         view.addSubview(stopButton)
+        
+        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 2 * spacing).isActive = true
         
         recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         recordButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -68,6 +79,5 @@ class RecordViewController: UIViewController {
     @objc func stopRecording(sender : UIButton){
         print("stopButton tapped!")
     }
-    
 }
 
