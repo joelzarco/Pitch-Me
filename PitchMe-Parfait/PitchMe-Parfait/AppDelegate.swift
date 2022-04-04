@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .secondarySystemBackground
-//        window?.rootViewController = RecordViewController()
-        window?.rootViewController = EditAudioViewController()
+        window?.rootViewController = RecordViewController()
+//        window?.rootViewController = EditAudioViewController()
         return true
     }
 }

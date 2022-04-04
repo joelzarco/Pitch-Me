@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-class RecordViewController: UIViewController {
+class RecordViewController: UIViewController, AVAudioRecorderDelegate{
     
     let spacing : CGFloat = 20
     
@@ -15,6 +16,8 @@ class RecordViewController: UIViewController {
     let recordButton = UIButton()
     let stopButton = UIButton()
     let recordLabel = UILabel()
+    
+    var audioRecorder : AVAudioRecorder!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,7 @@ class RecordViewController: UIViewController {
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.text = "PitchMe Parfait!"
+        titleLabel.textColor = .lightGray
         
         recordButton.translatesAutoresizingMaskIntoConstraints = false
         let recordImage = UIImage(named: "Record") as UIImage?
@@ -71,12 +75,58 @@ class RecordViewController: UIViewController {
 
     }
     
-    @objc func startRecording(sender : UIButton){
-        print("RecordButton tapped!")
+    // Audio Methods
+    
+    @objc func startRecording(){
+        print("Record audio now!")
+        setupUI(isPlaying: true)
+        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
+        let recordingName = "recordedVoice.wav"
+        let pathArray = [dirPath, recordingName]
+        let filePath = URL(string: pathArray.joined(separator: "/"))
+
+        let session = AVAudioSession.sharedInstance()
+        try! session.setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+
+        try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
+        // RecordViewController acts as delegate
+        audioRecorder.delegate = self
+        audioRecorder.isMeteringEnabled = true
+        audioRecorder.prepareToRecord()
+        audioRecorder.record()
+        print(filePath!)
+    }
+    @objc private func stopRecording(_ sender : UIButton!){
+        print("Stop recording")
+        setupUI(isPlaying: false)
+        // stop audio recorder
+        audioRecorder.stop()
+        let audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.setActive(false)
+        // present EditView
+        let editVC = EditAudioViewController()
+        editVC.recordedAudioURL = audioRecorder.url
+        editVC.title = "Edit audio"
+        let navVC = UINavigationController(rootViewController: editVC)
+        present(navVC, animated: true)
+        navVC.modalPresentationStyle = .fullScreen
+        
+    }
+    func setupUI(isPlaying : Bool){
+        if (isPlaying){
+            stopButton.isEnabled = true
+            recordButton.isEnabled = false
+            recordLabel.text = "Recording in progress"
+        }else{
+            stopButton.isEnabled = false
+            recordButton.isEnabled = true
+            recordLabel.text = "Record again"
+        }
     }
     
-    @objc func stopRecording(sender : UIButton){
-        print("stopButton tapped!")
+    // from audio delegate
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        print("Finished recording")
     }
 }
 

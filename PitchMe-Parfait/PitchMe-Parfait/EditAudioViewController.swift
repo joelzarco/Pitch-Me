@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class EditAudioViewController: UIViewController {
     
@@ -20,8 +21,15 @@ class EditAudioViewController: UIViewController {
     let echoButton = UIButton()
     let reverbButton = UIButton()
     let stopButton = UIButton()
+    
+    var recordedAudioURL : URL!
+    var audioFile : AVAudioFile!
+    var audioEngine : AVAudioEngine!
+    var audioPlayerNode : AVAudioPlayerNode!
+    var stopTimer : Timer!
 
     override func viewDidLoad() {
+        setupAudio() // defined in extension
         super.viewDidLoad()
         view.backgroundColor = .lightGray
         style()
@@ -84,21 +92,51 @@ class EditAudioViewController: UIViewController {
     }
     
     func makeButton(button : UIButton, image : String, withTag Tag : Int) {
+        
         let image = UIImage(named: image) as UIImage?
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(image, for: .normal)
         button.tag = Tag
     }
     
-    @objc func playSound(sender : UIButton){
-        print("PlaySound tapped: \(sender.tag)")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureUI(.notPlaying)
     }
     
-    @objc func stopSound(sender : UIButton){
-        print("stopSound tapped")
+    @objc private func dismissSelf(){
+        dismiss(animated: true, completion: nil)
     }
     
-    @objc func dismissSelf(){
-        print("dismissed!")
+    @objc func playSound(sender : Any){
+        var effect : Int = 0
+        let button = sender as? UIButton
+        if let myButton = button{
+            effect = myButton.tag
+        }
+        print(effect)
+        switch effect{
+        case 0:
+            playSound(rate : 0.5)
+        case 1:
+            playSound(rate : 1.5)
+        case 2:
+            playSound(pitch : 1000)
+        case 3:
+            playSound(pitch : -1000)
+        case 4:
+            playSound(echo : true)
+        case 5:
+            playSound(reverb : true)
+        default:
+            print("Something went really wrong")
+        }
+        configureUI(.playing)
     }
+    
+    @objc func stopSound(sender : Any){
+        print("Stop button pressed")
+        stopAudio()
+    }
+    
 }
